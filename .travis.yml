@@ -1,8 +1,4 @@
-osx_image: xcode7.3
-language: objective-c
-script: 
-- sh travis_setup.sh
-- xcodebuild -workspace ./code/engine/solutions/gkENGINE_xcode.xcworkspace -scheme release_osx
+
 
 #xcode_workspace: ./code/engine/solutions/gkENGINE_xcode.xcworkspace
 #xcode_scheme: release_osx
@@ -19,6 +15,13 @@ addons:
       name: "gameknife/gkEngine"
       description: "Build submitted via Travis CI"
     notification_email: kaimingyi@163.com
-    #build_command_prepend: ./configure
-    build_command: make
+    build_command_prepend: "sh travis_setup.sh"
+    build_command: "xcodebuild -workspace ./code/engine/solutions/gkENGINE_xcode.xcworkspace -scheme release_osx"
     branch_pattern: coverity_scan
+
+
+osx_image: xcode7.3
+language: objective-c
+script: 
+- sh travis_setup.sh
+- xcodebuild -workspace ./code/engine/solutions/gkENGINE_xcode.xcworkspace -scheme release_osx
