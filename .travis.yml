@@ -1,5 +1,7 @@
 osx_image: xcode7.3
 language: objective-c
+xcode_project: ./code/engine/solutions/gkENGINE_xcode.xcworkspace
+xcode_scheme: release_osx
 
 env:
   global:
