@@ -4,15 +4,12 @@ env:
    #   via the "travis encrypt" command using the project repo's public key
    - secure: "diF47GYnCDA7R52P1XiZ7FhGlhTK8ULJ1l2SvRpPfeGmvOEVnzOfIBhlLQG1T+mbBlpdJh9cG9Gh7gyk1ZIEc7Hmb5oYaE0Zf0bieK6bswHFrsBSdOI2eoIfH3StNFor1inW0JPWtfhn1tQLZ6RhHyxpoby+xT8PlwT4IUHRFDC4aHWaPd6I7UlTOpmZu8KZ/yBnhPpLJTR+iVchKhSW0GG0Kk4+EnnH9VZxlAA3q3/dZqWuLoIFHKE+naGzWPnPbdQefTu7lX4jqdelpyFuTa1IsWAaNXG+r1/mO8lsZV3bsT79d01j98cHZ59dPUg+qSgaj92RvHbEMrRgINXObhnikqxnniw0WAWXGBIME2JTj0vmfmv54pebh1YxgrfDUuC1gmSCaxA4T8moleT/+jx/D5wOBFO+kKzzsDQZahVrntCMikkd1yNSsSGwePkIEKENt6qbEduxFBlBfD0MBuVpDVHZfHUkEzVwZgN91B1F6P9ulZ3bg+J7gPD9ogQFad/IsYdFYfqAETnpMyIy0ZKtXoYLwu4VvReAEtz06u9YLVFqZARiR1PfoCyQn9i7qlQ6PVeZNg5yotddAOmx43Ljgjg9dA8LVUMUOE6BW+nVPrU4IMTHkaC7NQWLr5Rah/ZEYfhPwmUZnWWgZUGfiA4J0jjPSveDs9OLRP243jU="
 
-before_install:
-      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
 addons:
   coverity_scan:
     project:
       name: "gameknife/gkEngine"
       description: "Build submitted via Travis CI"
     notification_email: kaimingyi@163.com
-    build_command_prepend: "./configure; make clean"
-    build_command:   "make -j 4"
+    build_command_prepend: ./configure
+    build_command: make
     branch_pattern: coverity_scan
