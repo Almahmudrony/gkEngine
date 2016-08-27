@@ -3,7 +3,7 @@ version: 0.1.0
 
 configuration:
 - DevelopLatest
-- Release
+#- Release
 
 environment:
   matrix:
@@ -16,6 +16,6 @@ before_build:
 - cmd: appveyor_setup.bat
 
 build:
-  project: code\gkENGINE_Vc14.sln
+  project: c:\projects\gkengine\code\gkENGINE_Vc14.sln
   parallel: true
   verbosity: minimal
