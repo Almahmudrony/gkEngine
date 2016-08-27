@@ -3,3 +3,22 @@ language: objective-c
 script: 
 - sh travis_setup.sh
 - xcodebuild -workspace ./code/engine/solutions/gkENGINE_xcode.xcworkspace -scheme release_osx
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "jAg8JlytpG5N4ckRXsiufDsZnbKlCjdQQzV2H3Z5G/j+4qsVApueL089Iz7Ao6FXQZlfGa+L710Km45lP7NBMc7ocUt0bsHhqdldkSjZvsVibfS2ccQcUgajDvd7rxs0MJP5ACNn6L12NVRiqtciwENaL90/stTxsO8d7aPkxn8QLTHc3iDeRYlexCSFeEDsucJQtjc6Jx5HHrXgJaIQ5ZMrfLcqLAHcadx9svIEoOY44dXPz0IBCgAzXUU+NYg2q9AtxnboM4FSTvopTiz8Bynf50HrVF27a1S/TRkg4W3cxjMXtvq4GlgHPowTtRksQdcUTGM9OQQLTEd23wPaWIecQEUt9BS+AJPEI19DEeCT5hupbEcWmEJ6CjHObTSQCA2zFEyzfYEgmrGFtz3WBgBlXJbpL4KRQCQs8UfXM1z9Zw9QWz0UAzEWxvLQS1ny6/UVzFf5vgEZ7tlijGbH2KVJuqj8aO45usPV0BhdnOiYCJ5KNpOkTWyRKEtYrBz7d3z5jj3odNQec0W+OMB4bmqlt1cMgjFMTVz59LRXD+IWi1klUStHa8uk1TeuWJ/7mliHjYhaxCsq6VVV+HvQT0jGd9dspZeCU8bKGNEmtdwEhNqwVTX+e8DwhGh+CCEydM9gdxHNB2NqBGQSnWEenArkEIvuouRc2sa1WYQi6FU="
+
+before_install:
+      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "gameknife/gkEngine"
+      description: "Build submitted via Travis CI"
+    notification_email: kaimingyi@163.com
+    build_command_prepend: "./configure; make clean"
+    build_command:   "make -j 4"
+    branch_pattern: coverity_scan
