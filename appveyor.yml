@@ -1,5 +1,5 @@
 os: Visual Studio 2015 CTP  
-version: 0.1.0
+version: 0.1.{build}
 
 configuration:
 - DevelopLatest
